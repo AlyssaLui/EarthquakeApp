@@ -5,7 +5,8 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 
 /**
@@ -49,6 +50,22 @@ public final class QueryUtils {
 
             // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
             // build up a list of Earthquake objects with the corresponding data.
+
+            JSONObject earthquakeData = new JSONObject(SAMPLE_JSON_RESPONSE);
+            JSONArray features = earthquakeData.getJSONArray("features");
+            for(int i=0; i<features.length(); i++){
+                JSONObject currentEarthquake = features.getJSONObject(i);
+                JSONObject properties = currentEarthquake.getJSONObject("properties");
+
+                String mag = properties.getString("mag");
+
+                String location = properties.getString("place");
+
+                long time = properties.getLong("time");
+
+
+                earthquakes.add(new Earthquake(mag, location, time));
+            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,

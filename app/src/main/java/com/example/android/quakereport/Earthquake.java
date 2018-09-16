@@ -5,11 +5,12 @@ public class Earthquake {
     private String magnitude;
     private String city;
     private String date;
+    private long time;
 
-    public Earthquake(String mag, String cityName, String occuranceDate){
+    public Earthquake(String mag, String cityName, long timeInMilliseconds){
         magnitude = mag;
         city = cityName;
-        date = occuranceDate;
+        time = timeInMilliseconds;
     }
 
     public String getMagnitude(){
@@ -24,6 +25,9 @@ public class Earthquake {
         return date;
     }
 
+    public long getTime(){
+        return time;
+    }
 
 
 }
